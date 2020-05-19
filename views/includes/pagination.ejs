@@ -1,0 +1,13 @@
+<% if(currentPage => 1 && lastPage <=3) {%> <% for(var i =1; i <= lastPage; i++
+) { %>
+<a
+  href="/?page=<%= i %>"
+  class="<%if(currentPage ==<%= i %> ){%> is-active <% } %>"
+>
+  <li><%= i %></li>
+</a>
+<% } %> <%}%> <%if(hasNext) {%>
+<a href="?page=<%= nextPage %>"><li>></li></a>
+<%}%> <% if(hasPrev) { %>
+<a href="?page=<%= prevPage %>"><li><</li></a>
+<% } %> <% if(currentPage ==1 && lastPage ==1) { %> <% } %>

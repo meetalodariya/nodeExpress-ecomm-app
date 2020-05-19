@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <% if (prods.length > 0) { %>
+    <div class="container">
+        <h4>Total Price: $<%= totalPrice %></h4>
+        <% for (let product of prods) { %>
+        <div class="card mt-2" style="flex-direction:row;">
+            <img class="mx-auto" height="200" width="200" src="/<%= product.productId.imageUrl %>" alt="">
+            <div class="card-body">
+                <div class="align-middle">
+                    <h4 class="card-title item-hl"><%= product.productId.title %></h4>
+                    <h5 class="text-right float-right item-hl">Quantity: <%= product.quantity %></h2>
+                </div>
+                <span class="card-title">$<%= product.productId.price %></span>
+                <p class="card-text"><%= product.productId.description %></p>
+                <a class="btn btn-outline-success" href="/products/<%= product.productId._id%>">Details</a>
+                <form action="/cart/delete/<%= product.productId._id%>" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                    <button type="submit" class="btn btn-outline-danger mt-2">Delete</a>
+                </form>
+            </div>
+        </div>
+        <% } %>
+        <div class="mx-auto">
+            
+        </div>
+        <form action="/create-order" method="POST" style="text-align: center;">
+            <button type="submit" class="btn btn-outline-info mt-2 mx-auto" >Order</a>
+        </form>
+
+    </div>
+    
+    <% } else { %>
+    <h1>No Products Found!</h1>
+    <% } %>
+
+    <%- include('../includes/end.ejs') %>
